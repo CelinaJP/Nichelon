@@ -905,8 +905,52 @@
     }
     
     .bio-layout {
-      max-width: 800px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4.5rem;
+      align-items: center;
+      max-width: 1050px;
       margin: 0 auto;
+    }
+    
+    @media (max-width: 991px) {
+      .bio-layout {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+        max-width: 700px;
+      }
+    }
+    
+    .bio-media-content {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      aspect-ratio: 3/4;
+      background: var(--bg-darker);
+    }
+    
+    .bio-media-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .bio-media-content:hover img {
+      transform: scale(1.04);
+    }
+    
+    .bio-media-glow {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 50%, rgba(220, 38, 38, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 2;
     }
     
     .bio-text-content {
@@ -1063,9 +1107,8 @@
     }
     
     .contact-layout {
-      display: grid;
-      grid-template-columns: 0.92fr 1.08fr;
-      gap: 4.5rem;
+      max-width: 650px;
+      margin: 0 auto;
     }
     
     .contact-info {
@@ -1252,10 +1295,6 @@
     }
     
     @media (max-width: 868px) {
-      .contact-layout {
-        grid-template-columns: 1fr;
-        gap: 4rem;
-      }
       .contact-form-container {
         padding: 2.25rem 1.75rem;
       }
@@ -1264,9 +1303,48 @@
     /* FOOTER */
     .footer {
       background: var(--bg-darker);
-      padding: 3.5rem 0;
+      padding: 4.5rem 0 3.5rem 0;
       text-align: center;
       border-top: 1px solid var(--card-border);
+    }
+    
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    
+    .footer-brand {
+      margin-bottom: -0.5rem;
+    }
+    
+    .footer-contact-details {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 4rem;
+      width: 100%;
+    }
+    
+    @media (max-width: 680px) {
+      .footer-contact-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.75rem;
+      }
+    }
+    
+    .footer-socials {
+      display: flex;
+      justify-content: center;
+    }
+    
+    .footer-bottom {
+      border-top: 1px solid var(--card-border);
+      width: 100%;
+      padding-top: 2rem;
     }
     
     .footer-logo {
@@ -1741,6 +1819,17 @@
             </div>
           </div>
           
+          <!-- Columna Derecha: Imagen del estudio (Nichelon en estudio) -->
+          <div class="bio-media-content">
+            <div class="bio-media-glow"></div>
+            <img 
+              src="/src/assets/images/nichelon_studio_uploaded_1783049551882.jpg" 
+              alt="Nichelon en el estudio de grabación" 
+              referrerPolicy="no-referrer"
+              loading="lazy"
+            />
+          </div>
+          
 
         </div>
       </div>
@@ -1755,54 +1844,7 @@
         </div>
         
         <div class="contact-layout">
-          <!-- Columna Izquierda: Detalles de contacto -->
-          <div class="contact-info">
-            
-            <div class="contact-details">
-              <!-- Email -->
-              <div class="contact-detail-item">
-                <div class="contact-icon-box" aria-hidden="true">
-                  <i class="fa-regular fa-envelope"></i>
-                </div>
-                <div class="contact-detail-text">
-                  <p>Email Oficial</p>
-                  <a href="mailto:nichelonpmc@gmail.com">nichelonpmc@gmail.com</a>
-                </div>
-              </div>
-              
-              <!-- Ubicación -->
-              <div class="contact-detail-item">
-                <div class="contact-icon-box" aria-hidden="true">
-                  <i class="fa-solid fa-location-dot"></i>
-                </div>
-                <div class="contact-detail-text">
-                  <p>Sede Principal</p>
-                  <span>Buenos Aires, Argentina</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Redes en contacto (con colores oficiales fijos) -->
-            <div class="contact-socials">
-              <h3 class="contact-socials-title">Redes Sociales Oficiales</h3>
-              <div class="contact-social-icons">
-                <a href="https://www.instagram.com/niche.pmc/?hl=es-la" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="Instagram">
-                  <i class="fab fa-instagram brand-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/nicolas.andrada.94" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="Facebook">
-                  <i class="fab fa-facebook-f brand-facebook"></i>
-                </a>
-                <a href="#" class="contact-social-btn" aria-label="Spotify (Próximamente)">
-                  <i class="fab fa-spotify brand-spotify"></i>
-                </a>
-                <a href="https://www.youtube.com/watch?v=6rwTgmHzvk4" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="YouTube">
-                  <i class="fab fa-youtube brand-youtube"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Columna Derecha: Formulario Formspree (líneas minimalistas y focus amarillo/naranja) -->
+          <!-- Formulario Formspree (líneas minimalistas y focus amarillo/naranja) -->
           <div class="contact-form-container">
             <form action="https://formspree.io/f/tu_id_aqui" method="POST" id="contact-form">
               <div class="form-group">
@@ -1833,11 +1875,59 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container">
-      <a href="#home" class="footer-logo">Nichelon<span>.</span></a>
-      <p class="footer-credits">
-        &copy; 2026 Nichelon. Todos los derechos reservados por <a href="https://porfolio-ce.vercel.app/" target="_blank" rel="noopener noreferrer">CJP</a>.
-      </p>
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="#home" class="footer-logo">Nichelon<span>.</span></a>
+      </div>
+      
+      <!-- Datos de Contacto en Footer -->
+      <div class="footer-contact-details">
+        <!-- Email -->
+        <div class="contact-detail-item">
+          <div class="contact-icon-box" aria-hidden="true">
+            <i class="fa-regular fa-envelope"></i>
+          </div>
+          <div class="contact-detail-text">
+            <p>Email Oficial</p>
+            <a href="mailto:nichelonpmc@gmail.com">nichelonpmc@gmail.com</a>
+          </div>
+        </div>
+        
+        <!-- Ubicación -->
+        <div class="contact-detail-item">
+          <div class="contact-icon-box" aria-hidden="true">
+            <i class="fa-solid fa-location-dot"></i>
+          </div>
+          <div class="contact-detail-text">
+            <p>Ubicación</p>
+            <span>Buenos Aires, Argentina</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Redes Sociales en Footer -->
+      <div class="footer-socials">
+        <div class="contact-social-icons">
+          <a href="https://www.instagram.com/niche.pmc/?hl=es-la" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="Instagram">
+            <i class="fab fa-instagram brand-instagram"></i>
+          </a>
+          <a href="https://www.facebook.com/nicolas.andrada.94" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="Facebook">
+            <i class="fab fa-facebook-f brand-facebook"></i>
+          </a>
+          <a href="#" class="contact-social-btn" aria-label="Spotify (Próximamente)">
+            <i class="fab fa-spotify brand-spotify"></i>
+          </a>
+          <a href="https://www.youtube.com/watch?v=6rwTgmHzvk4" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="YouTube">
+            <i class="fab fa-youtube brand-youtube"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="footer-credits">
+          &copy; 2026 Nichelon. Todos los derechos reservados por <a href="https://porfolio-ce.vercel.app/" target="_blank" rel="noopener noreferrer">CJP</a>.
+        </p>
+      </div>
     </div>
   </footer>
 
