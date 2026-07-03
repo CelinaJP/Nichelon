@@ -1,0 +1,1998 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nichelon | Sitio Oficial</title>
+  
+  <!-- FontAwesome Icons for brand social networks and interface icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <!-- Google Fonts: Space Grotesk (premium bold display headings) & Inter (ultra-clean legible body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    /* VARIABLES DE DISEÑO PREMIUM (Paleta de colores obligatoria y adaptable) */
+    :root {
+      /* MODO OSCURO (Default) */
+      --bg-color: #0b0b0b;              /* Fondo negro profundo o gris muy oscuro */
+      --bg-darker: #050505;             /* Negro extremo */
+      --card-bg: #121212;               /* Gris muy oscuro */
+      --card-bg-hover: #181818;         /* Gris oscuro hover */
+      --card-border: rgba(37, 99, 235, 0.12);
+      --card-border-hover: rgba(37, 99, 235, 0.55); /* Azul Marino Vibrante Hover */
+      
+      --accent-red: #2563EB;            /* Azul Marino Vibrante (Mantenemos nombres para compatibilidad de clases) */
+      --accent-yellow: #FFFFFF;         /* Blanco Limpio */
+      --accent-orange: #60A5FA;         /* Azul Claro Eléctrico */
+      --accent-gradient: linear-gradient(135deg, #1D4ED8 0%, #60A5FA 100%);
+      --accent-glow: rgba(37, 99, 235, 0.25);
+      
+      --text-primary: #FFFFFF;
+      --text-secondary: #94A3B8;        /* Slate 400 */
+      --text-muted: #475569;            /* Slate 600 */
+      --header-bg: rgba(11, 11, 11, 0.85);
+      --input-border: rgba(255, 255, 255, 0.12);
+      
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Inter', sans-serif;
+      --nav-height: 80px;
+    }
+    
+    [data-theme="light"] {
+      /* MODO CLARO (Adaptación con excelente contraste, legibilidad y elegancia urbana) */
+      --bg-color: #F8FAFC;              /* Slate Light */
+      --bg-darker: #E2E8F0;             /* Slate Medium Light */
+      --card-bg: #FFFFFF;               /* Blanco Puro */
+      --card-bg-hover: #F1F5F9;         /* Slate 100 */
+      --card-border: rgba(29, 78, 216, 0.08);
+      --card-border-hover: rgba(29, 78, 216, 0.45); /* Azul de Contraste */
+      
+      --accent-red: #1D4ED8;            /* Azul Marino en Modo Claro */
+      --accent-yellow: #2563EB;         /* Azul Real de Contraste */
+      --accent-orange: #3B82F6;         /* Azul Claro */
+      --accent-gradient: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+      --accent-glow: rgba(29, 78, 216, 0.15);
+      
+      --text-primary: #0F172A;          /* Azul Marino Profundo como Texto Principal */
+      --text-secondary: #475569;        /* Slate 700 */
+      --text-muted: #64748B;            /* Slate 500 */
+      --header-bg: rgba(248, 250, 252, 0.88);
+      --input-border: rgba(15, 23, 42, 0.18);
+    }
+    
+    /* REINICIO Y ESTILOS BASE */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* RESET GLOBAL DE ENLACES PARA EVITAR SUBRAYADOS INDESEADOS EN ICONOS */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+    }
+    
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-color);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-red);
+      border-radius: 4px;
+      border: 2px solid var(--bg-color);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-yellow);
+    }
+    
+    /* CONTENEDOR */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 1.25rem;
+      }
+    }
+    
+    /* COLORES OFICIALES DE MARCAS (Solo se activan al acercar el cursor / hover) */
+    .brand-spotify,
+    .brand-youtube,
+    .brand-facebook,
+    .brand-instagram {
+      color: var(--text-secondary);
+      transition: color 0.3s ease;
+    }
+
+    /* Al pasar el cursor sobre los botones o contenedores, se encienden sus colores originales */
+    .sidebar-icon:hover .brand-spotify,
+    .contact-social-btn:hover .brand-spotify,
+    .mobile-social-icon:hover .brand-spotify {
+      color: #1DB954 !important;
+    }
+    
+    .sidebar-icon:hover .brand-youtube,
+    .contact-social-btn:hover .brand-youtube,
+    .mobile-social-icon:hover .brand-youtube {
+      color: #FF0000 !important;
+    }
+    
+    .sidebar-icon:hover .brand-facebook,
+    .contact-social-btn:hover .brand-facebook,
+    .mobile-social-icon:hover .brand-facebook {
+      color: #1877F2 !important;
+    }
+    
+    .sidebar-icon:hover .brand-instagram,
+    .contact-social-btn:hover .brand-instagram,
+    .mobile-social-icon:hover .brand-instagram {
+      color: #E1306C !important;
+    }
+    
+    /* Excepción para el icono de Spotify dentro del vinilo para que mantenga su identidad */
+    .vinyl-label .brand-spotify {
+      color: #1DB954 !important;
+    }
+    
+    /* BARRA DE NAVEGACIÓN (NAVBAR) */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      z-index: 1000;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    
+    .header-scrolled {
+      border-bottom: 1px solid var(--accent-orange);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+    
+    .logo {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.15rem;
+    }
+    
+    .logo span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+    
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-link {
+      font-family: var(--font-display);
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.25s, transform 0.25s;
+      position: relative;
+      padding: 0.5rem 0;
+    }
+    
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* INTERRUPTOR DE TEMA MODO CLARO / OSCURO */
+    .theme-toggle-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: all 0.25s;
+    }
+    
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-yellow);
+      color: var(--accent-yellow);
+      transform: scale(1.05);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+    
+    /* Hamburguesa Mobile */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 18px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      z-index: 1100;
+    }
+    
+    .menu-toggle span {
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-primary);
+      transition: all 0.3s ease;
+    }
+    
+    /* MENÚ LATERAL REDES SOCIALES (FLOTANTE FIJO - DESKTOP ONLY) */
+    .sidebar-socials {
+      position: fixed;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 99;
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+    }
+    
+    .sidebar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .sidebar-icon:hover {
+      border-color: var(--accent-red);
+      transform: translateX(6px) scale(1.05);
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    
+    /* SECCIÓN HOME / HERO (Pared de ladrillos sin revoque + degradados sutiles) */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: var(--nav-height);
+      background: linear-gradient(90deg, var(--bg-color) 0%, transparent 22%, transparent 78%, var(--bg-color) 100%),
+                  linear-gradient(180deg, rgba(11, 11, 11, 0.3) 0%, var(--bg-color) 100%), 
+                  url('/src/assets/images/nichelon_bg_1783013520911.jpg') no-repeat center center/cover;
+      text-align: center;
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      animation: fadeIn 1s ease-out;
+      max-width: 950px;
+      padding: 0 1.5rem;
+    }
+    
+    .hero-pretitle {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-red);
+      margin-bottom: 1.25rem;
+      text-shadow: 0 0 15px var(--accent-glow);
+    }
+    
+    /* TRATAMIENTO TIPOGRÁFICO DE ALTO IMPACTO "NICHELON" (Con degradado sutil) */
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 11vw, 8rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 0.85;
+      letter-spacing: -0.05em;
+      margin-bottom: 2rem;
+      position: relative;
+      background: linear-gradient(135deg, #FFFFFF 25%, var(--accent-yellow) 65%, var(--accent-orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.65));
+    }
+    
+    [data-theme="light"] .hero-title {
+      background: linear-gradient(135deg, var(--text-primary) 25%, var(--accent-yellow) 70%, var(--accent-orange) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+    }
+    
+    .hero-title::after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 4px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    
+    .hero-subtitle {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      font-size: clamp(0.75rem, 2.2vw, 1.1rem);
+      color: var(--text-secondary);
+      letter-spacing: 0.22em;
+      margin-top: 2.25rem;
+      font-weight: 500;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    [data-theme="light"] .hero-subtitle {
+      text-shadow: none;
+      color: var(--text-secondary);
+    }
+    
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      transition: color 0.3s;
+    }
+    
+    .scroll-indicator:hover {
+      color: var(--accent-red);
+    }
+    
+    .scroll-arrow {
+      animation: bounce 2s infinite;
+      color: var(--accent-red);
+      font-size: 1.1rem;
+    }
+    
+    /* SECCIONES EN GENERAL */
+    .section {
+      padding: 7.5rem 0;
+      position: relative;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+    
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      position: relative;
+      display: inline-block;
+      margin-bottom: 0.75rem;
+    }
+    
+    .section-title span {
+      position: relative;
+      color: var(--accent-red);
+    }
+    
+    .section-title span::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--accent-gradient);
+      border-radius: 2px;
+    }
+    
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0.75rem auto 0;
+      font-weight: 300;
+    }
+    
+    /* SECCIÓN VIDEOS */
+    .videos-section {
+      background: var(--bg-darker);
+    }
+    
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .video-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .video-card:hover {
+      border-color: var(--accent-red);
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px var(--accent-glow);
+    }
+    
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 */
+      background: #000;
+    }
+    
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    
+    .video-info {
+      padding: 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+    }
+    
+    .video-tag {
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--accent-orange);
+      letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+    }
+    
+    .video-title {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--text-primary);
+    }
+    
+    /* Controles de navegación del carrusel mobile */
+    .carousel-nav {
+      display: none;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .carousel-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s;
+    }
+    
+    .carousel-btn:hover {
+      background: var(--accent-yellow);
+      border-color: var(--accent-yellow);
+      color: #000;
+      box-shadow: 0 0 15px var(--accent-glow);
+    }
+    
+    /* Indicadores visuales de carrusel */
+    .carousel-dots {
+      display: none;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+    
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: all 0.25s;
+    }
+    
+    .carousel-dot.active {
+      width: 24px;
+      border-radius: 4px;
+      background: var(--accent-red);
+    }
+    
+    @media (max-width: 1024px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .video-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 1.5rem;
+        padding-bottom: 1.5rem;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+      
+      .video-grid::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .video-card {
+        flex: 0 0 85%;
+        scroll-snap-align: center;
+      }
+      
+      .carousel-nav, .carousel-dots {
+        display: flex;
+      }
+    }
+    
+    /* SECCIÓN MÚSICA */
+    .music-section {
+      background: var(--bg-color);
+    }
+    
+    /* Rediseño de la tarjeta Spotify con gradiente sofisticado de la paleta (Gris/Azul Marino) */
+    .spotify-card {
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.08) 0%, rgba(5, 5, 5, 0.98) 100%), var(--card-bg);
+      border: 1px solid rgba(37, 99, 235, 0.12);
+      border-radius: 20px;
+      padding: 5rem 2.5rem;
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    
+    [data-theme="light"] .spotify-card {
+      background: radial-gradient(circle at top left, rgba(29, 78, 216, 0.05) 0%, #FFFFFF 100%), var(--card-bg);
+      border: 1px solid rgba(29, 78, 216, 0.12);
+      box-shadow: 0 10px 30px rgba(10, 17, 40, 0.06);
+    }
+    
+    .spotify-card:hover {
+      border-color: var(--accent-red);
+      box-shadow: 0 15px 35px var(--accent-glow);
+    }
+    
+    .vinyl-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 2.5rem;
+    }
+    
+    .vinyl {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #000000 0%, #1a1a1a 25%, #0d0d0d 30%, #262626 35%, #111111 45%, #333333 50%, #151515 60%, #222222 70%, #000000 100%);
+      border-radius: 50%;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      position: relative;
+      animation: spin 9s linear infinite;
+      border: 2px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .vinyl-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 1.25rem;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    }
+    
+    .vinyl-tonearm {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 50px;
+      height: 100px;
+      border-left: 2px solid var(--text-secondary);
+      border-bottom: 2px solid var(--text-secondary);
+      transform-origin: top right;
+      transform: rotate(18deg);
+      transition: transform 0.3s;
+      pointer-events: none;
+    }
+    
+    .spotify-card:hover .vinyl-tonearm {
+      transform: rotate(26deg);
+    }
+    
+    .music-pretitle {
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      color: var(--accent-yellow);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .music-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    
+    .music-description {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      max-width: 550px;
+      margin: 0 auto 2.5rem;
+    }
+    
+    /* BOTONES */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1.1rem 2.5rem;
+      border-radius: 50px;
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: pointer;
+    }
+    
+    .btn-spotify {
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+    
+    .btn-spotify:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px var(--accent-orange);
+    }
+    
+    /* SECCIÓN MERCH (Placeholder premium con patrones geométricos abstractos) */
+    .merch-section {
+      background: var(--bg-darker);
+    }
+    
+    .merch-placeholder {
+      background: radial-gradient(circle at bottom right, rgba(37, 99, 235, 0.08) 0%, rgba(5, 5, 5, 0.98) 100%), var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 5rem 2.5rem;
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    
+    [data-theme="light"] .merch-placeholder {
+      background: radial-gradient(circle at bottom right, rgba(29, 78, 216, 0.05) 0%, #FFFFFF 100%), var(--card-bg);
+      border: 1px solid rgba(29, 78, 216, 0.12);
+      box-shadow: 0 10px 30px rgba(10, 17, 40, 0.06);
+    }
+    
+    /* Patrón de fondo geométrico elegante */
+    .merch-glow-overlay {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    
+    .merch-icons-row {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      color: var(--text-secondary);
+      z-index: 1;
+    }
+    
+    .merch-icon-wrapper {
+      width: 76px;
+      height: 76px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1.5px dashed var(--accent-red);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      transition: all 0.3s;
+      box-shadow: inset 0 0 12px rgba(0,0,0,0.1);
+    }
+    
+    [data-theme="light"] .merch-icon-wrapper {
+      background: rgba(0, 0, 0, 0.02);
+      border-color: var(--accent-red);
+    }
+    
+    .merch-placeholder:hover .merch-icon-wrapper {
+      color: var(--accent-yellow);
+      border-color: var(--accent-yellow);
+      transform: translateY(-6px) rotate(8deg);
+      box-shadow: 0 8px 15px var(--accent-glow);
+    }
+    
+    .merch-title {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      z-index: 1;
+    }
+    
+    .merch-description {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+      z-index: 1;
+    }
+    
+    .btn-disabled {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--input-border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+      z-index: 1;
+    }
+    
+    [data-theme="light"] .btn-disabled {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    /* SECCIÓN BIO (Biografía con excelente jerarquía y aire) */
+    .bio-section {
+      background: var(--bg-color);
+      overflow: hidden;
+    }
+    
+    .bio-layout {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .bio-text-content {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    /* Jerarquía e importancia para Niche PMC */
+    .bio-artist-name {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      margin-bottom: -0.25rem;
+      letter-spacing: -0.04em;
+    }
+    
+    .bio-artist-name span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .bio-paragraph {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+    
+    .bio-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 0.75rem;
+    }
+    
+    .bio-item {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    
+    .bio-marker {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      border: 1.5px solid var(--accent-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+    
+    .bio-item-content {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .bio-item-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+    }
+    
+    .bio-item-desc {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Panel lateral de badges (VIP concert pass style) */
+    .bio-badges-panel {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 3.5rem 2.5rem;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .bio-badges-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--accent-gradient);
+    }
+    
+    .bio-badge-card {
+      padding-bottom: 1.75rem;
+      margin-bottom: 1.75rem;
+      border-bottom: 1px dashed var(--card-border);
+    }
+    
+    .bio-badge-card:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .badge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .badge-tag {
+      font-family: var(--font-display);
+      background: var(--accent-glow);
+      border: 1px solid var(--accent-red);
+      color: var(--text-primary);
+      padding: 0.25rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    
+    .badge-role {
+      font-size: 0.8rem;
+      color: var(--accent-orange);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .badge-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    
+
+    /* SECCIÓN CONTACTO Y FORMULARIO */
+    .contact-section {
+      background: var(--bg-darker);
+      border-bottom: 1px solid var(--card-border);
+    }
+    
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 4.5rem;
+    }
+    
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2.25rem;
+    }
+    
+    .contact-tagline {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    
+    .contact-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+    
+    .contact-icon-box {
+      width: 52px;
+      height: 52px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-red);
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+    
+    .contact-detail-text p {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.15rem;
+    }
+    
+    .contact-detail-text a, .contact-detail-text span {
+      font-size: 1.15rem;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.25s;
+    }
+    
+    .contact-detail-text a:hover {
+      color: var(--accent-red);
+    }
+    
+    .contact-socials {
+      margin-top: 1rem;
+    }
+    
+    .contact-socials-title {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-secondary);
+      margin-bottom: 1.25rem;
+      font-weight: 600;
+    }
+    
+    .contact-social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .contact-social-btn {
+      width: 46px;
+      height: 46px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.15rem;
+      transition: all 0.25s;
+    }
+    
+    .contact-social-btn:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: var(--accent-red);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px var(--accent-glow);
+    }
+    
+    /* FORMULARIO ESTILO MODERNO MINIMALISTA (Solo línea inferior) */
+    .contact-form-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 3.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .form-group {
+      margin-bottom: 2.25rem;
+      position: relative;
+    }
+    
+    .form-label {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    
+    .form-input, .form-textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1.5px solid var(--input-border);
+      border-radius: 0;
+      padding: 0.85rem 0;
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+    
+    /* Foco iluminado en Crimson/Blood Red */
+    .form-input:focus, .form-textarea:focus {
+      border-bottom-color: var(--accent-red);
+    }
+    
+    /* Línea animada por debajo en focus */
+    .form-group::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent-gradient);
+      box-shadow: 0 2px 8px var(--accent-glow);
+      transition: width 0.3s ease;
+    }
+    
+    .form-group:focus-within::after {
+      width: 100%;
+    }
+    
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    
+    .btn-submit {
+      width: 100%;
+      background: var(--accent-gradient);
+      color: #FFFFFF;
+      border: none;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      border-radius: 8px;
+      box-shadow: 0 6px 20px var(--accent-glow);
+      text-transform: uppercase;
+      font-size: 1rem;
+    }
+    
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px var(--accent-red);
+    }
+    
+    @media (max-width: 868px) {
+      .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+      }
+      .contact-form-container {
+        padding: 2.25rem 1.75rem;
+      }
+    }
+    
+    /* FOOTER */
+    .footer {
+      background: var(--bg-darker);
+      padding: 3.5rem 0;
+      text-align: center;
+      border-top: 1px solid var(--card-border);
+    }
+    
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-logo span {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .footer-credits {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    
+    .footer-credits a {
+      color: var(--accent-yellow);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    
+    .footer-credits a:hover {
+      color: var(--text-primary);
+    }
+    
+    /* ANIMACIONES */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-8px);
+      }
+      60% {
+        transform: translateY(-4px);
+      }
+    }
+    
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    /* MENÚ MOBILE */
+    @media (max-width: 768px) {
+      .sidebar-socials {
+        display: none; /* Se ocultan las flotantes fijas en mobile para no saturar */
+      }
+      
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 320px;
+        height: 100vh;
+        background: var(--bg-darker);
+        border-left: 1px solid var(--card-border);
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        padding: 3rem 2rem;
+        transition: right 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        z-index: 1050;
+      }
+      
+      .nav-links.active {
+        right: 0;
+      }
+      
+      /* Row of mobile social icons in drawer menu */
+      .mobile-menu-socials {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--card-border);
+        width: 100%;
+      }
+      
+      .mobile-social-icon {
+        font-size: 1.5rem;
+        transition: transform 0.25s;
+      }
+      
+      .mobile-social-icon:hover {
+        transform: scale(1.15);
+      }
+      
+      /* Animación hamburguesa */
+      .menu-toggle.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+      
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .menu-toggle.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN STICKY -->
+  <header class="header" id="header">
+    <div class="container nav-container">
+      <a href="#home" class="logo" id="nav-logo">
+        Nichelon<span>.</span>
+      </a>
+      
+      <div class="nav-actions">
+        <nav class="nav-links" id="nav-menu">
+          <a href="#home" class="nav-link">Home</a>
+          <a href="#videos" class="nav-link">Videos</a>
+          <a href="#musica" class="nav-link">Música</a>
+          <a href="#merch" class="nav-link">Merchandising</a>
+          <a href="#bio" class="nav-link">Bio</a>
+          <a href="#contacto" class="nav-link">Contacto</a>
+        </nav>
+        
+        <!-- Botón Toggle de Modo Claro/Oscuro -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Cambiar tema visual" title="Cambiar tema">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+        
+        <button class="menu-toggle" id="menu-toggle" aria-label="Abrir Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MENÚ LATERAL FLOATING DE REDES SOCIALES (Solo Desktop - Con colores oficiales invariables) -->
+  <aside class="sidebar-socials" id="sidebar-socials" aria-label="Redes Sociales Laterales">
+    <a href="https://www.instagram.com/niche.pmc/?hl=es-la" target="_blank" rel="noopener noreferrer" class="sidebar-icon" aria-label="Instagram">
+      <i class="fab fa-instagram brand-instagram"></i>
+    </a>
+    <a href="https://www.facebook.com/nicolas.andrada.94" target="_blank" rel="noopener noreferrer" class="sidebar-icon" aria-label="Facebook">
+      <i class="fab fa-facebook-f brand-facebook"></i>
+    </a>
+    <a href="#" class="sidebar-icon" aria-label="Spotify (Próximamente)">
+      <i class="fab fa-spotify brand-spotify"></i>
+    </a>
+    <a href="https://www.youtube.com/watch?v=6rwTgmHzvk4" target="_blank" rel="noopener noreferrer" class="sidebar-icon" aria-label="YouTube">
+      <i class="fab fa-youtube brand-youtube"></i>
+    </a>
+  </aside>
+
+  <!-- MAIN WRAPPER -->
+  <main>
+    
+    <!-- SECCIÓN HOME (HERO - Con fondo de ladrillo visto) -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <p class="hero-pretitle">Sitio Oficial</p>
+        <h1 class="hero-title" id="main-hero-title">Nichelon</h1>
+        <p class="hero-subtitle">CLAN ANDRADA • PRIMERA MANCHA CREW • HALABALUSA</p>
+      </div>
+      
+      <a href="#videos" class="scroll-indicator">
+        <span>Videos</span>
+        <i class="fa-solid fa-chevron-down scroll-arrow"></i>
+      </a>
+    </section>
+
+    <!-- SECCIÓN VIDEOS (Refinado con bordes suaves, hover dorado e indicador fluido) -->
+    <section id="videos" class="section videos-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Video<span>s</span></h2>
+          <p class="section-subtitle">Últimos lanzamientos oficiales, sesiones underground y batallas directas desde las plazas.</p>
+        </div>
+        
+        <!-- Contenedor responsivo: Grid en Desktop, Swiper en Mobile -->
+        <div class="video-grid" id="video-grid">
+          
+          <!-- Video 1 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/189KZP8Yk0M" 
+                title="Nichelon - Lanzamiento PMC" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">Primera Mancha Crew</p>
+              <h3 class="video-title">Nichelon - Video #1</h3>
+            </div>
+          </article>
+
+          <!-- Video 2 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/kXyRpd3wWmk" 
+                title="Nichelon - Freestyle Section" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">Rap Underground</p>
+              <h3 class="video-title">Nichelon - Freestyle Plaza</h3>
+            </div>
+          </article>
+
+          <!-- Video 3 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/_Eb4xEj0sHk" 
+                title="Nichelon - Halabalusa Batallas" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">Movimiento Plaza</p>
+              <h3 class="video-title">Nichelon x Halabalusa</h3>
+            </div>
+          </article>
+
+          <!-- Video 4 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/2pS6nLcGfvU" 
+                title="Nichelon - Clan Andrada" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">Clan Andrada</p>
+              <h3 class="video-title">Nichelon - Producción Clan</h3>
+            </div>
+          </article>
+
+          <!-- Video 5 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/6rwTgmHzvk4" 
+                title="Nichelon - Single Oficial" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">Lanzamiento Oficial</p>
+              <h3 class="video-title">Nichelon - Single Reciente</h3>
+            </div>
+          </article>
+
+          <!-- Video 6 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/fRfvReryhpQ" 
+                title="Nichelon - PMC Live" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">En Vivo</p>
+              <h3 class="video-title">PMC - Directo Underground</h3>
+            </div>
+          </article>
+
+          <!-- Video 7 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/VWqvuuAWQcY" 
+                title="Nichelon - PMC Session" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">Primera Mancha Crew</p>
+              <h3 class="video-title">PMC Colaboración</h3>
+            </div>
+          </article>
+
+          <!-- Video 8 -->
+          <article class="video-card">
+            <div class="video-wrapper">
+              <iframe 
+                src="https://www.youtube.com/embed/jTQCL4Fmqyk" 
+                title="Nichelon - Clan Session" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen 
+                loading="lazy">
+              </iframe>
+            </div>
+            <div class="video-info">
+              <p class="video-tag">Clan Andrada</p>
+              <h3 class="video-title">Hermandad Clan Andrada</h3>
+            </div>
+          </article>
+
+        </div>
+        
+        <!-- Carrusel Mobile Navegación -->
+        <div class="carousel-nav">
+          <button class="carousel-btn" id="prev-btn" aria-label="Anterior video">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button class="carousel-btn" id="next-btn" aria-label="Siguiente video">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+        
+        <!-- Indicadores de carrusel -->
+        <div class="carousel-dots" id="carousel-dots">
+          <!-- Generado dinámicamente -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN MÚSICA -->
+    <section id="musica" class="section music-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Músic<span>a</span></h2>
+          <p class="section-subtitle">Toda la crudeza lírica de los barrios próximamente en plataformas digitales.</p>
+        </div>
+        
+        <div class="spotify-card">
+          <!-- Vinilo animado en puro CSS con colores de marca -->
+          <div class="vinyl-container">
+            <div class="vinyl">
+              <div class="vinyl-label">
+                <i class="fab fa-spotify brand-spotify"></i>
+              </div>
+            </div>
+            <div class="vinyl-tonearm"></div>
+          </div>
+          
+          <p class="music-pretitle">Plataformas Digitales</p>
+          <h3 class="music-title">Próximamente en Spotify</h3>
+          <p class="music-description">Estamos preparando la subida de los masters oficiales y el lanzamiento de nuevos singles de estudio para reventar las playlist del género.</p>
+          
+          <a href="#" class="btn btn-spotify" onclick="event.preventDefault(); alert('¡Los sencillos de Nichelon se están subiendo a Spotify de forma inminente!');">
+            <i class="fab fa-spotify brand-spotify"></i> Escuchar en Spotify (Próximamente)
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN MERCH (Placeholder premium con patrones geométricos sutiles) -->
+    <section id="merch" class="section merch-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Merchandisin<span>g</span></h2>
+          <p class="section-subtitle">Prendas premium del underground. Ropa urbana auténtica.</p>
+        </div>
+        
+        <div class="merch-placeholder">
+          <div class="merch-glow-overlay"></div>
+          
+          <div class="merch-icons-row">
+            <div class="merch-icon-wrapper" aria-hidden="true">
+              <i class="fa-solid fa-shirt"></i>
+            </div>
+            <div class="merch-icon-wrapper" aria-hidden="true">
+              <i class="fa-solid fa-socks"></i>
+            </div>
+            <div class="merch-icon-wrapper" aria-hidden="true">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+          </div>
+          
+          <h3 class="merch-title">Próximamente</h3>
+          <p class="merch-description">Prendas con estampados serigrafiados de alta densidad, camisetas oversize pesadas y accesorios de colección. Próximamente habilitaremos la tienda con pasarela de pagos.</p>
+          
+          <button class="btn btn-disabled" disabled>
+            Próximo Lanzamiento
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN BIO (Biografía Formateada a la perfección) -->
+    <section id="bio" class="section bio-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Biografí<span>a</span></h2>
+          <p class="section-subtitle">Los pilares, crews y competencias que formaron el underground de Buenos Aires.</p>
+        </div>
+        
+        <div class="bio-layout">
+          <!-- Columna Izquierda: Niche PMC y estructura de texto -->
+          <div class="bio-text-content">
+            <h3 class="bio-artist-name">Niche <span>PMC</span></h3>
+            <p class="bio-paragraph">
+              Nicolas Andrada (Nichelon) es un estandarte de la lírica cruda del hip-hop argentino. Crecido en el corazón del sur de Buenos Aires, ha llevado el rap de calle a un nivel de respeto unánime, uniendo crews y forjando batallas históricas.
+            </p>
+            
+            <div class="bio-list">
+              <!-- Item 1 -->
+              <div class="bio-item">
+                <div class="bio-marker" aria-hidden="true">1</div>
+                <div class="bio-item-content">
+                  <h4 class="bio-item-title">Primera Mancha Crew</h4>
+                  <p class="bio-item-desc">Integrante de <strong>Primera Mancha Crew</strong> (junto a Dtoke, Zeke, Markitos, Zone, Maximo, Jimbo, Cash, Biche y Next).</p>
+                </div>
+              </div>
+              
+              <!-- Item 2 -->
+              <div class="bio-item">
+                <div class="bio-marker" aria-hidden="true">2</div>
+                <div class="bio-item-content">
+                  <h4 class="bio-item-title">Clan Andrada</h4>
+                  <p class="bio-item-desc">También integro <strong>Clan Andrada</strong> junto a Zone, Maximo y Jimbo.</p>
+                </div>
+              </div>
+              
+              <!-- Item 3 -->
+              <div class="bio-item">
+                <div class="bio-marker" aria-hidden="true">3</div>
+                <div class="bio-item-content">
+                  <h4 class="bio-item-title">Halabalusa Movimiento Underground</h4>
+                  <p class="bio-item-desc">Organizador de <strong>Halabalusa Movimiento Underground</strong>, la mítica competencia en Claypole que forjó a los mejores freestylers de habla hispana.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO (Formulario de contacto premium minimalista con Formspree) -->
+    <section id="contacto" class="section contact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Contact<span>o</span></h2>
+          <p class="section-subtitle">Para contrataciones exclusivas, directos y colaboraciones en estudio, dejanos tu mensaje.</p>
+        </div>
+        
+        <div class="contact-layout">
+          <!-- Columna Izquierda: Detalles de contacto -->
+          <div class="contact-info">
+            
+            <div class="contact-details">
+              <!-- Email -->
+              <div class="contact-detail-item">
+                <div class="contact-icon-box" aria-hidden="true">
+                  <i class="fa-regular fa-envelope"></i>
+                </div>
+                <div class="contact-detail-text">
+                  <p>Email Oficial</p>
+                  <a href="mailto:nichelonpmc@gmail.com">nichelonpmc@gmail.com</a>
+                </div>
+              </div>
+              
+              <!-- Ubicación -->
+              <div class="contact-detail-item">
+                <div class="contact-icon-box" aria-hidden="true">
+                  <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <div class="contact-detail-text">
+                  <p>Sede Principal</p>
+                  <span>Buenos Aires, Argentina</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Redes en contacto (con colores oficiales fijos) -->
+            <div class="contact-socials">
+              <h3 class="contact-socials-title">Redes Sociales Oficiales</h3>
+              <div class="contact-social-icons">
+                <a href="https://www.instagram.com/niche.pmc/?hl=es-la" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="Instagram">
+                  <i class="fab fa-instagram brand-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/nicolas.andrada.94" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="Facebook">
+                  <i class="fab fa-facebook-f brand-facebook"></i>
+                </a>
+                <a href="#" class="contact-social-btn" aria-label="Spotify (Próximamente)">
+                  <i class="fab fa-spotify brand-spotify"></i>
+                </a>
+                <a href="https://www.youtube.com/watch?v=6rwTgmHzvk4" target="_blank" rel="noopener noreferrer" class="contact-social-btn" aria-label="YouTube">
+                  <i class="fab fa-youtube brand-youtube"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Columna Derecha: Formulario Formspree (líneas minimalistas y focus amarillo/naranja) -->
+          <div class="contact-form-container">
+            <form action="https://formspree.io/f/tu_id_aqui" method="POST" id="contact-form">
+              <div class="form-group">
+                <label for="name" class="form-label">Nombre</label>
+                <input type="text" name="name" id="name" class="form-input" placeholder="Tu nombre" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="_replyto" id="email" class="form-input" placeholder="nombre@correo.com" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="message" class="form-label">Mensaje</label>
+                <textarea name="message" id="message" class="form-textarea" placeholder="Escribe tu propuesta o consulta..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-submit">
+                Enviar Booking <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <a href="#home" class="footer-logo">Nichelon<span>.</span></a>
+      <p class="footer-credits">
+        &copy; 2026 Nichelon. Todos los derechos reservados por <a href="https://porfolio-ce.vercel.app/" target="_blank" rel="noopener noreferrer">CJP</a>.
+      </p>
+    </div>
+  </footer>
+
+  <!-- MINIMAL JAVASCRIPT FOR RESPONSIVE MENU, LIGHT/DARK MODE TOGGLE, AND CAROUSEL INDICATORS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // 1. MODO CLARO / OSCURO (MANEJO DE CONFIGURACIÓN Y LOCALSTORAGE)
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      const themeIcon = document.getElementById('theme-icon');
+      const htmlElement = document.documentElement;
+      
+      // Cargar preferencia del usuario
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      htmlElement.setAttribute('data-theme', savedTheme);
+      updateToggleIcon(savedTheme);
+      
+      themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        htmlElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateToggleIcon(newTheme);
+      });
+      
+      function updateToggleIcon(theme) {
+        if (theme === 'dark') {
+          themeIcon.className = 'fa-solid fa-sun';
+        } else {
+          themeIcon.className = 'fa-solid fa-moon';
+        }
+      }
+      
+      // 2. COMPORTAMIENTO DE NAVBAR FIJO CON SCROLL
+      const header = document.getElementById('header');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          header.classList.add('header-scrolled');
+        } else {
+          header.classList.remove('header-scrolled');
+        }
+      });
+      
+      // 3. MENÚ HAMBURGUESA MOBILE RESPONSIVO
+      const menuToggle = document.getElementById('menu-toggle');
+      const navMenu = document.getElementById('nav-menu');
+      const navLinks = document.querySelectorAll('.nav-link');
+      
+      function toggleMenu() {
+        menuToggle.classList.toggle('active');
+        navMenu.classList.toggle('active');
+      }
+      
+      menuToggle.addEventListener('click', toggleMenu);
+      
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          menuToggle.classList.remove('active');
+          navMenu.classList.remove('active');
+        });
+      });
+      
+      // 4. CONTROLADOR DEL CARRUSEL DE VIDEOS EN DISPOSITIVOS MÓVILES
+      const grid = document.getElementById('video-grid');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const dotsContainer = document.getElementById('carousel-dots');
+      
+      if (grid) {
+        const totalCards = grid.children.length;
+        
+        // Crear indicadores visuales (dots) dinámicamente
+        for (let i = 0; i < totalCards; i++) {
+          const dot = document.createElement('button');
+          dot.classList.add('carousel-dot');
+          if (i === 0) dot.classList.add('active');
+          dot.setAttribute('aria-label', `Ir al video ${i + 1}`);
+          dot.addEventListener('click', () => {
+            const cardWidth = grid.children[0].offsetWidth + 24; // Card width + gap
+            grid.scrollTo({
+              left: cardWidth * i,
+              behavior: 'smooth'
+            });
+            updateDots(i);
+          });
+          dotsContainer.appendChild(dot);
+        }
+        
+        function updateDots(activeIndex) {
+          const dots = dotsContainer.querySelectorAll('.carousel-dot');
+          dots.forEach((dot, index) => {
+            if (index === activeIndex) {
+              dot.classList.add('active');
+            } else {
+              dot.classList.remove('active');
+            }
+          });
+        }
+        
+        // Sincronizar dots al deslizar manualmente
+        let isScrolling;
+        grid.addEventListener('scroll', () => {
+          clearTimeout(isScrolling);
+          isScrolling = setTimeout(() => {
+            const cardWidth = grid.children[0].offsetWidth + 24;
+            const activeIndex = Math.round(grid.scrollLeft / cardWidth);
+            updateDots(activeIndex);
+          }, 100);
+        });
+        
+        // Navegación de botones prev y next
+        prevBtn.addEventListener('click', () => {
+          const cardWidth = grid.children[0].offsetWidth + 24;
+          grid.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          const cardWidth = grid.children[0].offsetWidth + 24;
+          grid.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+      }
+      
+      // 5. OCULTAR ICONOS FLOTANTES EN SECCIÓN CONTACTO Y FOOTER
+      const sidebarSocials = document.getElementById('sidebar-socials');
+      const contactoSection = document.getElementById('contacto');
+      const footerElement = document.querySelector('.footer');
+      
+      if (sidebarSocials && (contactoSection || footerElement)) {
+        const hideSocials = () => {
+          sidebarSocials.style.opacity = '0';
+          sidebarSocials.style.visibility = 'hidden';
+          sidebarSocials.style.transform = 'translateY(-50%) translateX(-20px)';
+        };
+        
+        const showSocials = () => {
+          sidebarSocials.style.opacity = '1';
+          sidebarSocials.style.visibility = 'visible';
+          sidebarSocials.style.transform = 'translateY(-50%) translateX(0)';
+        };
+
+        let isContactVisible = false;
+        let isFooterVisible = false;
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.target === contactoSection) {
+              isContactVisible = entry.isIntersecting;
+            }
+            if (entry.target === footerElement) {
+              isFooterVisible = entry.isIntersecting;
+            }
+          });
+
+          if (isContactVisible || isFooterVisible) {
+            hideSocials();
+          } else {
+            showSocials();
+          }
+        }, {
+          root: null,
+          threshold: 0.01
+        });
+        
+        if (contactoSection) observer.observe(contactoSection);
+        if (footerElement) observer.observe(footerElement);
+      }
+    });
+  </script>
+</body>
+</html>
